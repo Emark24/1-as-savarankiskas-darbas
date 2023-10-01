@@ -2,32 +2,32 @@
 
 studentas::studentas() {
 
-	cout << "Iveskite sutdento varda: "; cin >> vard;
-	cout << "Ivesk pavarde: "; cin >> pav;
+	cout << "Iveskite studento varda: "; cin >> vard;
+	cout << "Ivesk syudento pavarde: "; cin >> pav;
 	cout << "Kiek pazymiu buvo semestre? "; int n; cin >> n;
 	for (int i = 0; i < n; i++) {
 		int k;
 		cout << "Ivesk " << i + 1 << " semestro pazymi: "; cin >> k; paz.push_back(k);
 	}
 	cout << "Ivesk egzamino pazymi: "; cin >> egz;
-	rezVid();
+	skaiciavimo_Strategija == 'm' ? rezMed() : rezVid();
 }
 studentas::studentas(string v, string p, vector<int>pp, int e)
 {
 	vard = v; pav = p; paz = pp; egz = e;
-	rezVid();
+	skaiciavimo_Strategija == 'm' ? rezMed() : rezVid();
 }
 studentas::studentas(const studentas& temp) { //1. copy constructor 
 	vard = temp.vard; pav = temp.pav;
 	paz = temp.paz; egz = temp.egz;
-	rezVid();
+	skaiciavimo_Strategija == 'm' ? rezMed() : rezVid();
 }
 studentas& studentas::operator=(const studentas & temp) //2. copy assignment
 {
 	if (this == &temp) return *this;
 	vard = temp.vard; pav = temp.pav;
 	paz = temp.paz; egz = temp.egz;
-	rezVid();
+	skaiciavimo_Strategija == 'm' ? rezMed() : rezVid();
 	return *this;
 }
 studentas::~studentas() {							//3. destructor
@@ -47,4 +47,17 @@ void studentas::rezVid() {
 	//rez = vid * 04 + egz * 0.6;
 	float sum = std::accumulate(paz.begin(), paz.end(), 0.0);
 	rez = sum / paz.size() * 0.4 + egz * 0.6;
+}
+void studentas::rezMed() {
+	rez = mediana(paz) * 0.4 + egz * 0.6;
+}
+
+double studentas::mediana(vector<int> vec) {
+	typedef vector<double>::size_type vecSize;
+	vecSize size = vec.size();
+	if (size == 0)
+		throw std::domain_error("negalima skaiciuoti medianos tusciam vektoriui");
+	sort(vec.begin(), vec.end());
+	vecSize vid = size / 2;
+	return size % 2 == 0 ? (vec[vid] + vec[vid - 1]) / 2.0 : vec[vid] / 1.0;
 }

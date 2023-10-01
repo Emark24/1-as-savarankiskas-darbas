@@ -1,4 +1,4 @@
-using namespace std;
+#pragma once
 
 #include <array>
 #include <iomanip>
@@ -6,6 +6,7 @@ using namespace std;
 #include <string>
 #include <vector>
 #include <numeric>
+#include <algorithm>
 
 using std::string;
 using std::cout;
@@ -18,6 +19,10 @@ using std::left;
 using std::right;
 using std::fixed;
 using std::setprecision;
+using std::domain_error;
+using std::sort;
+
+extern char skaiciavimo_Strategija;
 
 class studentas {
 	string vard, pav;
@@ -39,6 +44,9 @@ public:
 	void printas();
 	void printasRez();
 	void rezVid();
+	void rezMed();
+
+	double mediana(vector<int> vec);
 
 
 
