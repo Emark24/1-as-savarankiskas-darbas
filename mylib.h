@@ -1,4 +1,4 @@
-#pragma once
+using namespace std;
 
 #include <array>
 #include <iomanip>
@@ -7,6 +7,10 @@
 #include <vector>
 #include <numeric>
 #include <algorithm>
+#include <fstream>
+#include <ctime>
+#include <cstdlib>
+#include <sstream>
 
 using std::string;
 using std::cout;
@@ -25,30 +29,28 @@ using std::sort;
 extern char skaiciavimo_Strategija;
 
 class studentas {
-	string vard, pav;
-	//array<int, 10>paz;
-	vector<int> paz;
-	int egz;
-	float rez;
+    string vard, pav;
+    //array<int, 10>paz;
+    vector<int> paz;
+    int egz;
+    float rez;
 public:
-	studentas();
-	studentas(string v, string p, vector<int>pp, int e);
-	studentas(const studentas& temp);
-	studentas& operator = (const studentas& temp);
-	~studentas();
-	//Getter
-	inline string getVardas() { return vard; }
-	inline int getPazNr() { return paz.size(); }
-	//Setter
-	inline void setVardas(string t) { vard = t; }
-	void printas();
-	void printasRez();
-	void rezVid();
-	void rezMed();
+    studentas();
+    studentas(string v, string p, vector<int>pp, int e);
+    studentas(const studentas& temp);
+    studentas& operator = (const studentas& temp);
+    ~studentas();
+    //Getter
+    inline string getVardas() { return vard; }
+    inline int getPazNr() { return paz.size(); }
+    inline float getRezultatasVid() { return rez; }
+    inline float getRezultatasMed() { return rez; }
+    //Setter
+    inline void setVardas(string t) { vard = t; }
+    void printas();
+    void printasRez();
+    void rezVid();
+    void rezMed();
 
-	double mediana(vector<int> vec);
-
-
-
-
+    double mediana(vector<int> vec);
 };
