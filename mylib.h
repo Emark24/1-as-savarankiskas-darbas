@@ -1,56 +1,54 @@
-using namespace std;
+//mylib.h
+#ifndef MYLIB_H
+#define MYLIB_H
 
-#include <array>
-#include <iomanip>
-#include <iostream>
 #include <string>
 #include <vector>
-#include <numeric>
+#include <fstream> 
 #include <algorithm>
-#include <fstream>
 #include <ctime>
 #include <cstdlib>
-#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <chrono>
+#include <random>
 
-using std::string;
-using std::cout;
-using std::cin;
-using std::endl;
-using std::array;
-using std::vector;
-using std::setw;
-using std::left;
-using std::right;
-using std::fixed;
-using std::setprecision;
-using std::domain_error;
-using std::sort;
 
-extern char skaiciavimo_Strategija;
-
-class studentas {
-    string vard, pav;
-    //array<int, 10>paz;
-    vector<int> paz;
-    int egz;
-    float rez;
+class Studentas {
 public:
-    studentas();
-    studentas(string v, string p, vector<int>pp, int e);
-    studentas(const studentas& temp);
-    studentas& operator = (const studentas& temp);
-    ~studentas();
-    //Getter
-    inline string getVardas() { return vard; }
-    inline int getPazNr() { return paz.size(); }
-    inline float getRezultatasVid() { return rez; }
-    inline float getRezultatasMed() { return rez; }
-    //Setter
-    inline void setVardas(string t) { vard = t; }
-    void printas();
-    void printasRez();
-    void rezVid();
-    void rezMed();
+    Studentas();
+    Studentas(const std::string& vardas, const std::string& pavarde, const std::vector<int>& namuDarbai, int egzaminas, bool naudotiVidurki);
+    Studentas(const Studentas& other);
+    Studentas& operator=(const Studentas& other);
+    ~Studentas();
 
-    double mediana(vector<int> vec);
+    void OutputData() const;
+
+    Studentas(bool generateRandom);
+    void GenerateRandomGrades();
+    void WriteToFile(const std::string& filename) const;
+    void SetStudentNumber(int number) {
+        studentNumber_ = number;
+    }
+
+    void WriteToFile(std::ostream& file) const;
+
+
+
+    const std::string& GetVardas() const { return Vardas; }
+    const std::string& GetPavarde() const { return Pavarde; }
+    const std::vector<int>& GetNamuDarbai() const { return ND; }
+    double GetGalutinis() const { return Galutinis; }
+
+private:
+    std::string Vardas;
+    std::string Pavarde;
+    std::vector<int> ND;
+    int Egzaminas;
+    double Galutinis;
+    bool Vidurkis;
+    int studentNumber_;
+    void SkaiciuotiGalutiniPazymi();
 };
+
+#endif
